@@ -6,7 +6,7 @@ services:
     # Mapeia a porta 5000 do host para a porta 5000 do container,
     # onde a aplicação Flask está rodando.
     ports:
-      - "8081:80"
+      - "8181:80"
     # Monta um volume para persistir os dados do dataset.
     # O diretório 'datasets' na sua máquina será espelhado
     # para o diretório '/app/datasets' dentro do container.
@@ -14,4 +14,5 @@ services:
       - ./datasets:/app/datasets
     # Política de reinicialização: sempre reiniciar o container se ele parar.
     restart: always
+
 
