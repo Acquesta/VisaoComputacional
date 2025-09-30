@@ -1,0 +1,6 @@
+Flask
+Flask-SocketIO
+numpy
+opencv-python-headless
+ultralytics
+eventlet

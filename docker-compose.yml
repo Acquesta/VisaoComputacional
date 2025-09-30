@@ -1,0 +1,18 @@
+services:
+  # Define o serviço para a sua aplicação de visão computacional
+  vision-app:
+    # Constrói a imagem a partir do Dockerfile no diretório atual (.)
+    build: .
+    # Nome do container para fácil identificação
+    container_name: python_vision_app
+    # Mapeia a porta 5000 do host para a porta 5000 do container,
+    # onde a aplicação Flask está rodando.
+    ports:
+      - "5000:5000"
+    # Monta um volume para persistir os dados do dataset.
+    # O diretório 'datasets' na sua máquina será espelhado
+    # para o diretório '/app/datasets' dentro do container.
+    volumes:
+      - ./datasets:/app/datasets
+    # Política de reinicialização: sempre reiniciar o container se ele parar.
+    restart: always
