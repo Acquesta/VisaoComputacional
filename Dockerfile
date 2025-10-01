@@ -5,6 +5,8 @@ FROM python:3.9-slim
 # Define o diretório de trabalho dentro do container.
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y libgl1-mesa-glx
+
 COPY requirements.txt .
 
 # Instala as bibliotecas Python listadas no requirements.txt.
@@ -20,3 +22,4 @@ EXPOSE 5000
 
 # O comando que será executado quando o container iniciar.
 CMD ["python", "app.py"]
+
