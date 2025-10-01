@@ -8,8 +8,9 @@ from flask_socketio import SocketIO
 import threading
 from ultralytics import YOLO
 
-# Carrega modelo YOLOv8 (nano = mais leve e rápido)
-model = YOLO("yolov8n.pt")
+# Carrega o modelo a partir do caminho local dentro do contêiner
+model_path = './models/yolov8n.pt' # Ou '/app/models/yolov8n.pt'
+model = YOLO(model_path)
 
 # ====== SUA FUNÇÃO DE VISÃO COMPUTACIONAL ======
 
