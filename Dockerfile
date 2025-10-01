@@ -5,7 +5,8 @@ FROM python:3.9-slim
 # Define o diretório de trabalho dentro do container.
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y libgl1-mesa-glx
+# Instala as bibliotecas essenciais para o OpenCV em ambientes de servidor
+RUN apt-get update && apt-get install -y libgl1 libglib2.0-0
 
 COPY requirements.txt .
 
@@ -22,4 +23,5 @@ EXPOSE 5000
 
 # O comando que será executado quando o container iniciar.
 CMD ["python", "app.py"]
+
 
