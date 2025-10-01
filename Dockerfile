@@ -1,27 +1,24 @@
-# Use a imagem oficial do Python 3.9 como base.
-# A tag 'slim' é uma versão mais leve, ideal para produção.
-FROM python:3.9-slim
+#Use uma imagem base oficial do PyTorch com suporte a CUDA 11.8
+#Isso garante que todos os drivers e bibliotecas da NVIDIA estejam presentes
+FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
 
-# Define o diretório de trabalho dentro do container.
+#Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Instala as bibliotecas essenciais para o OpenCV em ambientes de servidor
-RUN apt-get update && apt-get install -y libgl1 libglib2.0-0
-
+#Copia o arquivo de dependências para o diretório de trabalho
 COPY requirements.txt .
 
-# Instala as bibliotecas Python listadas no requirements.txt.
-# A opção --no-cache-dir reduz o tamanho da imagem final.
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copia todos os arquivos do diretório atual (onde está o Dockerfile)
-# para o diretório de trabalho dentro do container.
 COPY . .
 
-# Expõe a porta 5000 para permitir a comunicação com a aplicação Flask.
+#Instala as dependências do Python
+#O --no-cache-dir reduz o tamanho da imagem final
+RUN pip install --no-cache-dir -r requirements.txt
+
+#Copia o restante dos arquivos da aplicação (código, modelos, etc.)
+COPY . .
+
+#Expõe a porta em que o Flask/SocketIO irá rodar
 EXPOSE 5000
 
-# O comando que será executado quando o container iniciar.
+#Comando para iniciar a aplicação quando o container for executado
 CMD ["python", "app.py"]
-
-
